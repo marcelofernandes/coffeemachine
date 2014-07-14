@@ -19,6 +19,7 @@ public abstract class CoffeeMachineTest {
 		factory = new MockComponentsFactory();
 
 		display = factory.getDisplay();
+		display.info("Insert coins and select a drink!");
 
 	}
 	
