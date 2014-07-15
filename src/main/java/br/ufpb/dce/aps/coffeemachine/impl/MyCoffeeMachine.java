@@ -33,4 +33,12 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		factory.getDisplay().info("Total: US$ " + dolar + "." + cents);
 	}
 
+	public void cancel() {
+		
+		if(cents == 0 && dolar == 0) {
+			throw new CoffeeMachineException("Sessão cancelada!");
+		}
+		
+	}
+
 }
