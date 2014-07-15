@@ -7,17 +7,23 @@ import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
 public class MyCoffeeMachine implements CoffeeMachine {
 
 	private ComponentsFactory factory;
+	private int cents, dolar;
 
 	public MyCoffeeMachine(ComponentsFactory factory) {
+		this.cents = 0;
+		this.dolar = 0;
 		this.factory = factory;
 		factory.getDisplay().info("Insert coins and select a drink!");
 	}
 
 	public void insertCoin(Coin coin) {
 		int total = 0;
+
 		total += coin.getValue();
-		int cents = total % 100;
-		int dolar = total / 100;
+
+		cents += total % 100;
+		dolar += total / 100;
+
 		factory.getDisplay().info("Total: US$ " + dolar + "." + cents);
 	}
 
