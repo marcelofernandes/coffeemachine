@@ -1,5 +1,8 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.ufpb.dce.aps.coffeemachine.CashBox;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachine;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
@@ -11,11 +14,13 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 	private ComponentsFactory factory;
 	private int cents, dolar;
+	List<Coin> coins;
 
 	public MyCoffeeMachine(ComponentsFactory factory) {
 		this.cents = 0;
 		this.dolar = 0;
 		this.factory = factory;
+		this.coins = new ArrayList<Coin>();
 		factory.getDisplay().info("Insert coins and select a drink!");
 	}
 
@@ -31,23 +36,34 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 		cents += total % 100;
 		dolar += total / 100;
-
+		
+		coins.add(coin);
+		
 		factory.getDisplay().info("Total: US$ " + dolar + "." + cents);
 	}
 
 	public void cancel() {
-		
-		if(cents == 0 && dolar == 0) {
-			
+
+		if (cents == 0 && dolar == 0) {
+
 			throw new CoffeeMachineException("Sessão cancelada!");
-			
+
+		}
+
+		factory.getDisplay().warn("Cancelling drink. Please, get your coins.");
+		
+		for(Coin coin: Coin.reverse()){
+			for(int i = 0; i < coins.size(); i++){
+				if(coins.get(i).equals(coin) ){
+					factory.getCashBox().release(coins.get(i));
+				}
+			}
 		}
 		
-		factory.getDisplay().warn("Cancelling drink. Please, get your coins.");
-		factory.getCashBox().release(Coin.halfDollar);
+		this.coins.clear();
+		
 		factory.getDisplay().info(Messages.INSERT_COINS_MESSAGE);
-		
-		
+
 	}
 
 }
