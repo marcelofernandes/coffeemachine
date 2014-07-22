@@ -1,5 +1,7 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
+import static org.mockito.Matchers.anyDouble;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import br.ufpb.dce.aps.coffeemachine.CoffeeMachine;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
 import br.ufpb.dce.aps.coffeemachine.Coin;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
+import br.ufpb.dce.aps.coffeemachine.Drink;
 import br.ufpb.dce.aps.coffeemachine.Messages;
 
 public class MyCoffeeMachine implements CoffeeMachine {
@@ -62,8 +65,42 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		
 		this.coins.clear();
 		
-		factory.getDisplay().info(Messages.INSERT_COINS_MESSAGE);
+		factory.getDisplay().info(Messages.INSERT_COINS);
 
+	}
+	
+	
+//	Selecionar o um café preto e não retornar troco. 
+//	Ou seja, o valor inserido foi exatamante o valor do café. 
+//	Garanta que ao termino da seleção, seja iniciada uma nova sessão, 
+//	mostrando a mensagem de inserir moedas.
+
+	public void select(Drink drink) {
+		int copo = 1;
+		double agua = 1.5;
+		double poDeCafe = 2.0;
+		
+			
+		
+		if(drink.equals(Drink.BLACK)){
+//			if(factory.getCoffeePowderDispenser().contains(Drink.BLACK)){
+//				factory.getDisplay().info(Messages.INSERT_COINS);
+//			}
+			factory.getCupDispenser().contains(copo);
+			factory.getWaterDispenser().contains(agua);
+			factory.getCoffeePowderDispenser().contains(poDeCafe);
+			
+			factory.getDisplay().info(Messages.MIXING);
+			factory.getCoffeePowderDispenser().release(poDeCafe);
+			factory.getWaterDispenser().release(agua);
+			
+			factory.getDisplay().info(Messages.RELEASING);
+			factory.getCupDispenser().release(copo);
+			factory.getDrinkDispenser().release(agua);
+			factory.getDisplay().info(Messages.TAKE_DRINK);	
+			
+			factory.getDisplay().info(Messages.INSERT_COINS);	
+		}
 	}
 
 }
