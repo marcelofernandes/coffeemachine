@@ -15,12 +15,20 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	private ComponentsFactory factory;
 	private int cents, dolar;
 	List<Coin> coins;
+	private double acucar, poDeCafe, agua;
+	private int copo;
 
 	public MyCoffeeMachine(ComponentsFactory factory) {
 		this.cents = 0;
 		this.dolar = 0;
 		this.factory = factory;
 		this.coins = new ArrayList<Coin>();
+
+		this.copo = 1;
+		this.agua = 1.5;
+		this.poDeCafe = 2.0;
+		this.acucar = 1.0;
+
 		factory.getDisplay().info("Insert coins and select a drink!");
 	}
 
@@ -57,8 +65,8 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		factory.getDisplay().info(Messages.INSERT_COINS);
 
 	}
-	
-	private void retornarMoedas(){
+
+	private void retornarMoedas() {
 		for (Coin coin : Coin.reverse()) {
 			for (int i = 0; i < coins.size(); i++) {
 				if (coins.get(i).equals(coin)) {
@@ -69,36 +77,45 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		this.coins.clear();
 	}
 
+	// Ao tentar selecionar uma bebida, a máquina vai estar sem pó de café.
+	// Garanta que o sistema mande a mensagem “out_of_coffePowder” e retorne as
+	// moedas inseridas, além de iniciar uma nova sessão.
+
 	public void select(Drink drink) {
-		int copo = 1;
-		double agua = 1.5;
-		double poDeCafe = 2.0;
-		double acucar = 1.0;
+		if (factory.getCupDispenser().contains(copo)
+				&& factory.getWaterDispenser().contains(agua)
+				&& factory.getCoffeePowderDispenser().contains(poDeCafe)) {
 
-		factory.getCupDispenser().contains(copo);
-		factory.getWaterDispenser().contains(agua);
-		factory.getCoffeePowderDispenser().contains(poDeCafe);
+			if (drink == Drink.BLACK_SUGAR ) factory.getSugarDispenser().contains(acucar);
+			//		&& !(factory.getSugarDispenser().contains(acucar)) ){
+//				factory.getDisplay().warn("Out of Coffee Powder");
+//				retornarMoedas();
+//				factory.getDisplay().info(Messages.INSERT_COINS);
+		//	}
 
-		if (drink == Drink.BLACK_SUGAR) {
-			factory.getSugarDispenser().contains(acucar);
+			
+			factory.getDisplay().info(Messages.MIXING);
+			factory.getCoffeePowderDispenser().release(poDeCafe);
+			factory.getWaterDispenser().release(agua);
+
+			if (drink == Drink.BLACK_SUGAR) {
+				factory.getSugarDispenser().release(acucar);
+			}
+
+			factory.getDisplay().info(Messages.RELEASING);
+			factory.getCupDispenser().release(copo);
+			factory.getDrinkDispenser().release(agua);
+			factory.getDisplay().info(Messages.TAKE_DRINK);
+			factory.getDisplay().info(Messages.INSERT_COINS);
+
+			this.coins.clear();
+		}else{
+			factory.getDisplay().warn("Out of Coffee Powder");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
 		}
-
-		factory.getDisplay().info(Messages.MIXING);
-		factory.getCoffeePowderDispenser().release(poDeCafe);
-		factory.getWaterDispenser().release(agua);
-
-		if (drink == Drink.BLACK_SUGAR) {
-			factory.getSugarDispenser().release(acucar);
-		}
-
-		factory.getDisplay().info(Messages.RELEASING);
-		factory.getCupDispenser().release(copo);
-		factory.getDrinkDispenser().release(agua);
-		factory.getDisplay().info(Messages.TAKE_DRINK);
-
-		factory.getDisplay().info(Messages.INSERT_COINS);
 		
-		this.coins.clear();
+		
 	}
 
 }
