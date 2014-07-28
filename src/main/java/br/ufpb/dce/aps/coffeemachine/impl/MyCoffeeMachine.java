@@ -1,11 +1,8 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
-import static org.mockito.Matchers.anyDouble;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufpb.dce.aps.coffeemachine.CashBox;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachine;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
 import br.ufpb.dce.aps.coffeemachine.Coin;
@@ -39,9 +36,9 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 		cents += total % 100;
 		dolar += total / 100;
-		
+
 		coins.add(coin);
-		
+
 		factory.getDisplay().info("Total: US$ " + dolar + "." + cents);
 	}
 
@@ -54,50 +51,60 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		}
 
 		factory.getDisplay().warn("Cancelling drink. Please, get your coins.");
-		
-		for(Coin coin: Coin.reverse()){
-			for(int i = 0; i < coins.size(); i++){
-				if(coins.get(i).equals(coin) ){
+
+		retornarMoedas();
+
+		factory.getDisplay().info(Messages.INSERT_COINS);
+
+	}
+	
+	private void retornarMoedas(){
+		for (Coin coin : Coin.reverse()) {
+			for (int i = 0; i < coins.size(); i++) {
+				if (coins.get(i).equals(coin)) {
 					factory.getCashBox().release(coins.get(i));
 				}
 			}
 		}
-		
 		this.coins.clear();
-		
-		factory.getDisplay().info(Messages.INSERT_COINS);
-
 	}
+
+	// Cancelar uma sessão depois de selecionar um café com açucar. Garanta que
+	// as moedas inseridas antes da ação de Cancelar sejam devolvidas.
+	//
+	// Existe um método Coin.reverse() que retorna as moedas em ordem
+	// descrescente de valor.
 
 	public void select(Drink drink) {
 		int copo = 1;
 		double agua = 1.5;
 		double poDeCafe = 2.0;
 		double acucar = 1.0;
-		
+
 		factory.getCupDispenser().contains(copo);
 		factory.getWaterDispenser().contains(agua);
 		factory.getCoffeePowderDispenser().contains(poDeCafe);
-		
-		if(drink == Drink.BLACK_SUGAR){
+
+		if (drink == Drink.BLACK_SUGAR) {
 			factory.getSugarDispenser().contains(acucar);
 		}
-		
+
 		factory.getDisplay().info(Messages.MIXING);
 		factory.getCoffeePowderDispenser().release(poDeCafe);
 		factory.getWaterDispenser().release(agua);
-		
-		if(drink == Drink.BLACK_SUGAR){
+
+		if (drink == Drink.BLACK_SUGAR) {
 			factory.getSugarDispenser().release(acucar);
 		}
-		
+
 		factory.getDisplay().info(Messages.RELEASING);
 		factory.getCupDispenser().release(copo);
 		factory.getDrinkDispenser().release(agua);
-		factory.getDisplay().info(Messages.TAKE_DRINK);	
+		factory.getDisplay().info(Messages.TAKE_DRINK);
+
+		factory.getDisplay().info(Messages.INSERT_COINS);
 		
-		factory.getDisplay().info(Messages.INSERT_COINS);	
-		
+		this.coins.clear();
 	}
 
 }
