@@ -68,39 +68,36 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		factory.getDisplay().info(Messages.INSERT_COINS);
 
 	}
-	
-	
-//	Selecionar o um café preto e não retornar troco. 
-//	Ou seja, o valor inserido foi exatamante o valor do café. 
-//	Garanta que ao termino da seleção, seja iniciada uma nova sessão, 
-//	mostrando a mensagem de inserir moedas.
 
 	public void select(Drink drink) {
 		int copo = 1;
 		double agua = 1.5;
 		double poDeCafe = 2.0;
+		double acucar = 1.0;
 		
-			
+		factory.getCupDispenser().contains(copo);
+		factory.getWaterDispenser().contains(agua);
+		factory.getCoffeePowderDispenser().contains(poDeCafe);
 		
-		if(drink.equals(Drink.BLACK)){
-//			if(factory.getCoffeePowderDispenser().contains(Drink.BLACK)){
-//				factory.getDisplay().info(Messages.INSERT_COINS);
-//			}
-			factory.getCupDispenser().contains(copo);
-			factory.getWaterDispenser().contains(agua);
-			factory.getCoffeePowderDispenser().contains(poDeCafe);
-			
-			factory.getDisplay().info(Messages.MIXING);
-			factory.getCoffeePowderDispenser().release(poDeCafe);
-			factory.getWaterDispenser().release(agua);
-			
-			factory.getDisplay().info(Messages.RELEASING);
-			factory.getCupDispenser().release(copo);
-			factory.getDrinkDispenser().release(agua);
-			factory.getDisplay().info(Messages.TAKE_DRINK);	
-			
-			factory.getDisplay().info(Messages.INSERT_COINS);	
+		if(drink == Drink.BLACK_SUGAR){
+			factory.getSugarDispenser().contains(acucar);
 		}
+		
+		factory.getDisplay().info(Messages.MIXING);
+		factory.getCoffeePowderDispenser().release(poDeCafe);
+		factory.getWaterDispenser().release(agua);
+		
+		if(drink == Drink.BLACK_SUGAR){
+			factory.getSugarDispenser().release(acucar);
+		}
+		
+		factory.getDisplay().info(Messages.RELEASING);
+		factory.getCupDispenser().release(copo);
+		factory.getDrinkDispenser().release(agua);
+		factory.getDisplay().info(Messages.TAKE_DRINK);	
+		
+		factory.getDisplay().info(Messages.INSERT_COINS);	
+		
 	}
 
 }
