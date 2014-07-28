@@ -69,12 +69,6 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		this.coins.clear();
 	}
 
-	// Cancelar uma sessão depois de selecionar um café com açucar. Garanta que
-	// as moedas inseridas antes da ação de Cancelar sejam devolvidas.
-	//
-	// Existe um método Coin.reverse() que retorna as moedas em ordem
-	// descrescente de valor.
-
 	public void select(Drink drink) {
 		int copo = 1;
 		double agua = 1.5;
