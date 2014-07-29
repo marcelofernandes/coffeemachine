@@ -1,7 +1,12 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.mockito.InOrder;
 
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachine;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
@@ -15,7 +20,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	private ComponentsFactory factory;
 	private int cents, dolar;
 	List<Coin> coins;
-	private double acucar, poDeCafe, agua;
+	private double acucar, poDeCafe, agua, creme;
 	private int copo;
 
 	public MyCoffeeMachine(ComponentsFactory factory) {
@@ -28,6 +33,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		this.agua = 1.5;
 		this.poDeCafe = 2.0;
 		this.acucar = 1.0;
+		this.creme = 1.0;
 
 		factory.getDisplay().info("Insert coins and select a drink!");
 	}
@@ -78,6 +84,32 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	}
 
 	public void select(Drink drink) {
+		if(drink.equals(Drink.WHITE)){
+			verifyBlackPlan();
+			
+			factory.getCreamerDispenser().contains(creme);
+			
+			verifyBlackMix();
+			factory.getCreamerDispenser().release(creme);
+			
+			
+			factory.getDisplay().info(Messages.RELEASING);
+			factory.getCupDispenser().release(copo);
+			factory.getDrinkDispenser().release(agua);
+			
+			factory.getDisplay().info(Messages.TAKE_DRINK);
+			factory.getDisplay().info(Messages.INSERT_COINS);
+
+			this.coins.clear();
+			return;
+
+		}
+		prepararCafe(drink);
+		
+
+	}
+
+	private void prepararCafe(Drink drink){
 		if (!(factory.getCupDispenser().contains(copo))) {
 
 			factory.getDisplay().warn("Out of Cup");
@@ -104,10 +136,10 @@ public class MyCoffeeMachine implements CoffeeMachine {
 				return;
 			}
 
-			factory.getDisplay().info(Messages.MIXING);
-			factory.getCoffeePowderDispenser().release(poDeCafe);
-			factory.getWaterDispenser().release(agua);
-
+//			factory.getDisplay().info(Messages.MIXING);
+//			factory.getCoffeePowderDispenser().release(poDeCafe);
+//			factory.getWaterDispenser().release(agua);
+			verifyBlackMix();
 			if (drink == Drink.BLACK_SUGAR) {
 				factory.getSugarDispenser().release(acucar);
 			}
@@ -120,7 +152,17 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 			this.coins.clear();
 		}
-
 	}
-
+	
+	private void verifyBlackPlan() {
+		factory.getCupDispenser().contains(1);
+		factory.getWaterDispenser().contains(2.0);
+		factory.getCoffeePowderDispenser().contains(1.0);
+	}
+	
+	private void verifyBlackMix() {
+		factory.getDisplay().info(Messages.MIXING);
+		factory.getCoffeePowderDispenser().release(poDeCafe);
+		factory.getWaterDispenser().release(agua);
+	}
 }
