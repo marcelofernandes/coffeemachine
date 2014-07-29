@@ -77,29 +77,33 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		this.coins.clear();
 	}
 
-
 	public void select(Drink drink) {
-		if ( !(factory.getCupDispenser().contains(copo)) ){
+		if (!(factory.getCupDispenser().contains(copo))) {
+
+			factory.getDisplay().warn("Out of Water");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
+			return;
+		} else if (!(factory.getWaterDispenser().contains(agua))) {
+
+			factory.getDisplay().warn("Out of Water");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
+		} else if (!(factory.getCoffeePowderDispenser().contains(poDeCafe))) {
 
 			factory.getDisplay().warn("Out of Coffee Powder");
 			retornarMoedas();
 			factory.getDisplay().info(Messages.INSERT_COINS);
-		}else if(!(factory.getWaterDispenser().contains(agua))){
+		} else {
 
-			factory.getDisplay().warn("Out of Coffee Powder");
-			retornarMoedas();
-			factory.getDisplay().info(Messages.INSERT_COINS);
-		}else if(!(factory.getCoffeePowderDispenser().contains(poDeCafe))) {
+			if (drink == Drink.BLACK_SUGAR
+					&& !(factory.getSugarDispenser().contains(acucar))) {
+				factory.getDisplay().warn("Out of Sugar");
+				retornarMoedas();
+				factory.getDisplay().info(Messages.INSERT_COINS);
+				return;
+			}
 
-			factory.getDisplay().warn("Out of Coffee Powder");
-			retornarMoedas();
-			factory.getDisplay().info(Messages.INSERT_COINS);
-		}else{
-
-			if (drink == Drink.BLACK_SUGAR ) factory.getSugarDispenser().contains(acucar);
-
-
-			
 			factory.getDisplay().info(Messages.MIXING);
 			factory.getCoffeePowderDispenser().release(poDeCafe);
 			factory.getWaterDispenser().release(agua);
@@ -116,8 +120,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 			this.coins.clear();
 		}
-		
-		
+
 	}
 
 }
