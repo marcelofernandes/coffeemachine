@@ -135,10 +135,6 @@ public class MyCoffeeMachine implements CoffeeMachine {
 				factory.getDisplay().info(Messages.INSERT_COINS);
 				return;
 			}
-
-//			factory.getDisplay().info(Messages.MIXING);
-//			factory.getCoffeePowderDispenser().release(poDeCafe);
-//			factory.getWaterDispenser().release(agua);
 			verifyBlackMix();
 			if (drink == Drink.BLACK_SUGAR) {
 				factory.getSugarDispenser().release(acucar);
