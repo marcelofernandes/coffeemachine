@@ -80,7 +80,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	public void select(Drink drink) {
 		if (!(factory.getCupDispenser().contains(copo))) {
 
-			factory.getDisplay().warn("Out of Water");
+			factory.getDisplay().warn("Out of Cup");
 			retornarMoedas();
 			factory.getDisplay().info(Messages.INSERT_COINS);
 			return;
