@@ -77,21 +77,27 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		this.coins.clear();
 	}
 
-	// Ao tentar selecionar uma bebida, a máquina vai estar sem pó de café.
-	// Garanta que o sistema mande a mensagem “out_of_coffePowder” e retorne as
-	// moedas inseridas, além de iniciar uma nova sessão.
 
 	public void select(Drink drink) {
-		if (factory.getCupDispenser().contains(copo)
-				&& factory.getWaterDispenser().contains(agua)
-				&& factory.getCoffeePowderDispenser().contains(poDeCafe)) {
+		if ( !(factory.getCupDispenser().contains(copo)) ){
+
+			factory.getDisplay().warn("Out of Coffee Powder");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
+		}else if(!(factory.getWaterDispenser().contains(agua))){
+
+			factory.getDisplay().warn("Out of Coffee Powder");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
+		}else if(!(factory.getCoffeePowderDispenser().contains(poDeCafe))) {
+
+			factory.getDisplay().warn("Out of Coffee Powder");
+			retornarMoedas();
+			factory.getDisplay().info(Messages.INSERT_COINS);
+		}else{
 
 			if (drink == Drink.BLACK_SUGAR ) factory.getSugarDispenser().contains(acucar);
-			//		&& !(factory.getSugarDispenser().contains(acucar)) ){
-//				factory.getDisplay().warn("Out of Coffee Powder");
-//				retornarMoedas();
-//				factory.getDisplay().info(Messages.INSERT_COINS);
-		//	}
+
 
 			
 			factory.getDisplay().info(Messages.MIXING);
@@ -109,10 +115,6 @@ public class MyCoffeeMachine implements CoffeeMachine {
 			factory.getDisplay().info(Messages.INSERT_COINS);
 
 			this.coins.clear();
-		}else{
-			factory.getDisplay().warn("Out of Coffee Powder");
-			retornarMoedas();
-			factory.getDisplay().info(Messages.INSERT_COINS);
 		}
 		
 		
