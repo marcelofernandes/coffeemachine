@@ -29,13 +29,15 @@ public class MyCoffeeMachine implements CoffeeMachine {
 			throw new CoffeeMachineException(
 					"Por favor, insira uma moeda verdadeira!");
 		}
-		
+
 		int total = 0;
 		total += coin.getValue();
-		
+
 		cents += total % 100;
 		dolar += total / 100;
+
 		coins.add(coin);
+		
 		factory.getDisplay().info("Total: US$ " + dolar + "." + cents);
 	}
 
@@ -43,7 +45,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		if (cents == 0 && dolar == 0) {
 			throw new CoffeeMachineException("Sessão cancelada!");
 		}
-		
+
 		factory.getDisplay().warn("Cancelling drink. Please, get your coins.");
 		retornarMoedas();
 		factory.getDisplay().info(Messages.INSERT_COINS);
@@ -61,10 +63,16 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 	public void select(Drink drink) {
 		Cafe cafe = null;
-		
+
 		switch (drink) {
 		case BLACK:
 			cafe = new Cafe(factory);
+			if (!this.verificarDinheiro()) {
+				factory.getDisplay().warn(Messages.NO_ENOUGHT_MONEY);
+				retornarMoedas();
+				factory.getDisplay().info(Messages.INSERT_COINS);
+				return;
+			}
 			break;
 		case WHITE:
 			cafe = new CafeComCreme(factory);
@@ -76,7 +84,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 			cafe = new CafeComCremeEacucar(factory);
 			break;
 		}
-		
+
 		if (cafe.contemIngredientes()) {
 			cafe.verifyBlackMix();
 			cafe.release();
@@ -85,8 +93,38 @@ public class MyCoffeeMachine implements CoffeeMachine {
 			retornarMoedas();
 			factory.getDisplay().info(Messages.INSERT_COINS);
 		}
-		
+
 		this.coins.clear();
 	}
+	
+//	list countcoins (int change){
+//		list l =;
+//
+//		for(r in reverse){
+//			while(r.value <- change){
+//				cashbox.count(R);
+//				l.add(r);
+//				change = change.r.value;
+//			}
+//		}
+//		
+//		return l;
+//
+//	}
+
+	private boolean verificarDinheiro() {
+		int valor = 0;
+		
+		for(int i = 0 ; i < coins.size(); i++){
+			valor += coins.get(i).getValue();
+		}
+		
+		if(valor >= 35){
+			return true;
+		}
+		return false;
+	}
+	
+	
 
 }
