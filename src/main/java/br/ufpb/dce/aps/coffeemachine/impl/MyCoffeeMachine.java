@@ -76,6 +76,13 @@ public class MyCoffeeMachine implements CoffeeMachine {
 			break;
 		case WHITE:
 			cafe = new CafeComCreme(factory);
+			if(!temTroco()){
+				factory.getDisplay().warn("I do not have enought change");
+				retornarMoedas();
+				factory.getDisplay().info(Messages.INSERT_COINS);
+				return;
+			}
+			
 			break;
 		case BLACK_SUGAR:
 			cafe = new CafeComAcucar(factory);
@@ -96,21 +103,6 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 		this.coins.clear();
 	}
-	
-//	list countcoins (int change){
-//		list l =;
-//
-//		for(r in reverse){
-//			while(r.value <- change){
-//				cashbox.count(R);
-//				l.add(r);
-//				change = change.r.value;
-//			}
-//		}
-//		
-//		return l;
-//
-//	}
 
 	private boolean verificarDinheiro() {
 		int valor = 0;
@@ -125,6 +117,17 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		return false;
 	}
 	
+	public boolean temTroco(){
+		int moeda1 = factory.getCashBox().count(Coin.dime);
+		int moeda2 =factory.getCashBox().count(Coin.nickel);
+		int moeda3 =factory.getCashBox().count(Coin.penny);
+		
+		if(moeda1 == 0 && moeda2 == 0 && moeda3 == 0){
+			return false;
+		}
+		
+		return true;
+	}
 	
 
 }
