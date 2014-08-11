@@ -22,8 +22,8 @@ public class CafeComAcucar extends Cafe{
 	}
 	
 	@Override
-	public void verifyBlackMix() {
-		super.verifyBlackMix();
+	public void prepararBebida() {
+		super.prepararBebida();
 		factory.getSugarDispenser().release(1.0);
 	}
 

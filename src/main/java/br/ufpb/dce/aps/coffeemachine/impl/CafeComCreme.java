@@ -17,8 +17,8 @@ public class CafeComCreme extends Cafe{
 	}
 	
 	@Override
-	public void verifyBlackMix() {
-		super.verifyBlackMix();
+	public void prepararBebida() {
+		super.prepararBebida();
 		factory.getCreamerDispenser().release(1.0);
 	}
 	
