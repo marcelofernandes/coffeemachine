@@ -14,17 +14,17 @@ public class Cafe {
 	protected void servirBebida() {
 		factory.getDisplay().info(Messages.RELEASING);
 		factory.getCupDispenser().release(1);
-		factory.getDrinkDispenser().release(1.5);
+		factory.getDrinkDispenser().release(100);
 	}
 	
 	public boolean contemIngredientes() {
 		if (! ( factory.getCupDispenser().contains(1) ) ) {
 			factory.getDisplay().warn("Out of Cup");
 			return false;	
-		} if (!(factory.getWaterDispenser().contains(2.0))) {
+		} if (!(factory.getWaterDispenser().contains(100))) {
 			factory.getDisplay().warn("Out of Water");
 			return false;
-		} if (!(factory.getCoffeePowderDispenser().contains(1.0))) {
+		} if (!(factory.getCoffeePowderDispenser().contains(15))) {
 			factory.getDisplay().warn("Out of Coffee Powder");
 			return false;
 		} 
@@ -33,8 +33,8 @@ public class Cafe {
 	
 	protected void prepararBebida() {
 		factory.getDisplay().info(Messages.MIXING);
-		factory.getCoffeePowderDispenser().release(2.0);
-		factory.getWaterDispenser().release(2.0);
+		factory.getCoffeePowderDispenser().release(15);
+		factory.getWaterDispenser().release(100);
 	}
 
 }
