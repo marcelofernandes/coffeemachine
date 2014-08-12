@@ -88,25 +88,38 @@ public class GerenteDeCaixa {
 	
 	public boolean caixaTemTroco(ComponentsFactory factory){
 		int aux;
+		
 		for (Coin coin : Coin.reverse()) {
 			aux = troco;
 			int qtdMoedas = 0;
+			
 			while ( (coin.getValue() <= aux) && (aux -coin.getValue() >= 0) ) {
-					qtdMoedas++;
-					aux -= coin.getValue();
+				qtdMoedas++;
+				aux -= coin.getValue();
 			}
+			
 			if((qtdMoedas > 0) ){
-				if(qtdMoedas<= (factory.getCashBox().count(coin))){
-					troco -= coin.getValue();
+				if(qtdMoedas <= (factory.getCashBox().count(coin))){
+					
+					
 					for(int i = 0; i < qtdMoedas; i++){
 						moedasDoTroco.add(coin);
+						troco -= coin.getValue();
 					}
+				
 				}
+				
+			}
+			
+			if(troco == 0){
+				return true;
 			}
 		}
+		
 		if(troco == 0){
 			return true;
 		}
+		
 		return false;
 	}
 	
