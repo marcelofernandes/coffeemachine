@@ -31,7 +31,7 @@ public class GerenteDeCaixa {
 		GerenteDeMensagens.mostrarMensagemInserirMoedas();
 	}
 	
-	public void insertCoin(Coin coin) {
+	public void inserirMoeda(Coin coin) {
 		if (coin == null) {
 			throw new CoffeeMachineException(
 					"Por favor, insira uma moeda verdadeira!");

@@ -16,7 +16,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	}
 
 	public void insertCoin(Coin coin) {
-		gerenteDeCaixa.insertCoin(coin);
+		gerenteDeCaixa.inserirMoeda(coin);
 	}
 
 	public void cancel() {

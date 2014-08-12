@@ -9,7 +9,6 @@ public class GerenteDeBebidas {
 	
 	private ComponentsFactory factory;
 	private Cafe cafe;
-	
 	private HashMap <Drink, Cafe> bebidas = new HashMap <Drink, Cafe>();
 	private GerenteDeCaixa caixa;
 
@@ -25,35 +24,34 @@ public class GerenteDeBebidas {
 		cafe = bebidas.get(drink);
 		caixa = gerenteDeCaixa;
 		try{
-			gerenteDeCaixa.verificarDinheiroInserido();
+			caixa.verificarDinheiroInserido();
 		}catch(DinheiroInsuficienteException e){
 			GerenteDeMensagens.mostrarMensagemDinheiroInsuficiente();
-			gerenteDeCaixa.retornarMoedas(factory);
+			caixa.retornarMoedas(factory);
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			return;
 		}	
-		try {
-			if(!cafe.contemIngredientes()){
-				throw new IngredientesAcabaramException();
-			}
-			try {
-				gerenteDeCaixa.verificarSeTemTroco(factory);
-			} catch (CaixaSemTrocoException e) {
-				GerenteDeMensagens.mostrarMensagemTrocoInsuficiente();
-				gerenteDeCaixa.retornarMoedas(factory);
-				GerenteDeMensagens.mostrarMensagemInserirMoedas();
-				return;
-			}
-			prepararBebida();
-			servirBebida();
-			GerenteDeMensagens.mostrarMensagemDePegarDrink();
-			gerenteDeCaixa.darOtroco(factory);
+		
+		if(!cafe.contemIngredientes()){
+			caixa.retornarMoedas(factory);
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
-		} catch (IngredientesAcabaramException e) {
-			gerenteDeCaixa.retornarMoedas(factory);
-			GerenteDeMensagens.mostrarMensagemInserirMoedas();
+			caixa.zerarValores();
+			return;
 		}
-		gerenteDeCaixa.zerarValores();
+		try {
+			caixa.verificarSeTemTroco(factory);
+		} catch (CaixaSemTrocoException e) {
+			GerenteDeMensagens.mostrarMensagemTrocoInsuficiente();
+			caixa.retornarMoedas(factory);
+			GerenteDeMensagens.mostrarMensagemInserirMoedas();
+			return;
+		}
+		prepararBebida();
+		servirBebida();
+		GerenteDeMensagens.mostrarMensagemDePegarDrink();
+		caixa.darOtroco(factory);
+		GerenteDeMensagens.mostrarMensagemInserirMoedas();
+		caixa.zerarValores();
 	}
 
 	public void prepararBebida() {
