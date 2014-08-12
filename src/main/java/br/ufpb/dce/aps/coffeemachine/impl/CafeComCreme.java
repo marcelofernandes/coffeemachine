@@ -10,10 +10,15 @@ public class CafeComCreme extends Cafe{
 	
 	@Override
 	public boolean contemIngredientes() {
-		if(super.contemIngredientes() && (factory.getCreamerDispenser().contains(1.5))){
-			return true;
-		}
-		return false;
+		if (!(super.contemIngredientes())){
+			return false;
+		}else{
+			if(!(factory.getCreamerDispenser().contains(1.5))){
+				factory.getDisplay().warn("Out of Creamer");
+				return false;
+			}
+		} 
+		return true;
 	}
 	
 	@Override
