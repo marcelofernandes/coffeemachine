@@ -10,11 +10,6 @@ public class MyCoffeeMachine implements CoffeeMachine {
 	private GerenteDeCaixa gerenteDeCaixa;
 	private GerenteDeBebidas gerenteDeBebidas;
 
-	public MyCoffeeMachine(ComponentsFactory factory) {
-		gerenteDeCaixa = new GerenteDeCaixa(factory);
-		gerenteDeBebidas = new GerenteDeBebidas(factory);
-	}
-
 	public void insertCoin(Coin coin) {
 		gerenteDeCaixa.inserirMoeda(coin);
 	}
@@ -25,6 +20,11 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 	public void select(Drink drink) {
 		gerenteDeBebidas.selecionarBebida(drink, gerenteDeCaixa);
+	}
+
+	public void setFactory(ComponentsFactory factory) {
+		gerenteDeCaixa = new GerenteDeCaixa(factory);
+		gerenteDeBebidas = new GerenteDeBebidas(factory);
 	}
 
 }
