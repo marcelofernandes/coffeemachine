@@ -18,6 +18,8 @@ public class GerenteDeBebidas {
 		bebidas.put(Drink.BLACK_SUGAR, new CafeComAcucar(factory));
 		bebidas.put(Drink.WHITE, new CafeComCreme(factory));
 		bebidas.put(Drink.WHITE_SUGAR, new CafeComCremeEacucar(factory));
+		bebidas.put(Drink.BOUILLON, new Bouillon(factory));
+
 	}
 
 	public void selecionarBebida(Drink drink, GerenteDeCaixa gerenteDeCaixa){

@@ -26,7 +26,7 @@ public class Cafe {
 		liberarBebida();
 	}
 	
-	public boolean contemIngredientes() {
+	protected boolean contemIngredientes() {
 		return contemCopo() && contemAgua() && contemPo();
 	}
 	
