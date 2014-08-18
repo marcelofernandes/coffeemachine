@@ -27,4 +27,8 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		gerenteDeBebidas = new GerenteDeBebidas(factory);
 	}
 
+	public void readBadge(int badgeCode) {
+		gerenteDeCaixa.lerCracha();
+	}
+
 }

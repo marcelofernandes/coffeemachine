@@ -16,7 +16,7 @@ public class GerenteDeMensagens {
 	}
 
 	public static void mostrarMensagemInserirMoedas() {
-		factory.getDisplay().info("Insert coins and select a drink!");
+		factory.getDisplay().info(Messages.INSERT_COINS);
 
 	}
 
@@ -26,7 +26,7 @@ public class GerenteDeMensagens {
 	}
 
 	public static void mostrarmensagemCancelar() {
-		factory.getDisplay().warn("Cancelling drink. Please, get your coins.");
+		factory.getDisplay().warn(Messages.CANCEL);
 
 	}
 
@@ -35,10 +35,15 @@ public class GerenteDeMensagens {
 	}
 
 	public static void mostrarMensagemTrocoInsuficiente() {
-		factory.getDisplay().warn("I do not have enought change");
+		factory.getDisplay().warn(Messages.NO_ENOUGHT_CHANGE);
 	}
 	
 	public static void mostrarMensagemDePegarDrink() {
-		factory.getDisplay().info("Please, take your drink.");
+		factory.getDisplay().info(Messages.TAKE_DRINK);
+	}
+
+	public static void mostrarMensagemCracha() {
+		factory.getDisplay().info(Messages.BADGE_READ);
+
 	}
 }

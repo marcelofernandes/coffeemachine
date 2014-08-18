@@ -136,5 +136,9 @@ public class GerenteDeCaixa {
 			}
 		}
 	}
+
+	public void lerCracha() {
+		GerenteDeMensagens.mostrarMensagemCracha();
+	}
 	
 }
