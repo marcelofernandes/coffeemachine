@@ -14,7 +14,7 @@ public class CafeComCremeEacucar extends Cafe{
 	@Override
 	public boolean contemIngredientes() {
 		if(super.contemIngredientes() && (factory.getCreamerDispenser().contains(20))
-				&& (factory.getSugarDispenser().contains(1.0))){
+				&& (factory.getSugarDispenser().contains(5))){
 			return true;
 		}
 		return false;
@@ -24,7 +24,7 @@ public class CafeComCremeEacucar extends Cafe{
 	public void prepararBebida() {
 		super.prepararBebida();
 		factory.getCreamerDispenser().release(20);
-		factory.getSugarDispenser().release(1.0);
+		factory.getSugarDispenser().release(5);
 	}
 
 }
