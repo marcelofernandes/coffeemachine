@@ -12,19 +12,6 @@ public class Bouillon extends Cafe{
 		// TODO Auto-generated constructor stub
 	}
 	
-//	@Override
-//	public boolean contemIngredientes() {
-//		if (!(super.contemIngredientes())){
-//			return false;
-//		}else{
-//			if(!(factory.getCreamerDispenser().contains(20))){
-//				factory.getDisplay().warn("Out of Creamer");
-//				return false;
-//			}
-//		} 
-//		return true;
-//	}
-	
 	@Override
 	public void prepararBebida() {
 		super.prepararBebida();
@@ -32,7 +19,7 @@ public class Bouillon extends Cafe{
 	
 	protected boolean contemPo(){
 		if (!(factory.getBouillonDispenser().contains(po))) {
-			factory.getDisplay().warn("Out of Coffee Powder");
+			factory.getDisplay().warn("Out of Bouillon Powder");
 			return false;
 		}
 		return true;
