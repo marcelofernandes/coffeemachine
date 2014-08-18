@@ -24,7 +24,7 @@ public class GerenteDeBebidas {
 		cafe = bebidas.get(drink);
 		caixa = gerenteDeCaixa;
 		try{
-			caixa.verificarDinheiroInserido();
+			caixa.verificarDinheiroInserido(cafe.getPreco());
 		}catch(DinheiroInsuficienteException e){
 			GerenteDeMensagens.mostrarMensagemDinheiroInsuficiente();
 			caixa.retornarMoedas(factory);

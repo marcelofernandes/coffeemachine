@@ -13,9 +13,8 @@ public class GerenteDeCaixa {
 	private List<Coin> moedasDoTroco;
 	private boolean passarTroco;
 	private int valorInserido;
-	private boolean daPraComprar;
 	private int troco;
-	private static final int PRECO_CAFE = 35;
+	private int precoCafe;;
 	private ComponentsFactory factory;
 
 	public GerenteDeCaixa(ComponentsFactory factory){
@@ -40,16 +39,6 @@ public class GerenteDeCaixa {
 		cents += coin.getValue() % 100;
 		dolar += coin.getValue() / 100;
 		coins.add(coin);
-		if(valorInserido > PRECO_CAFE){
-			passarTroco = true;
-			daPraComprar = true;
-		}else if(valorInserido < PRECO_CAFE){
-			daPraComprar = false;
-			passarTroco = false;
-		}else{
-			daPraComprar = true;
-			passarTroco = false;
-		}
 		GerenteDeMensagens.mostrarValorTotal(dolar, cents);
 
 	}
@@ -63,63 +52,49 @@ public class GerenteDeCaixa {
 		GerenteDeMensagens.mostrarMensagemInserirMoedas();
 	}
 	
-	public void calcularTroco() {
-		this.troco = valorInserido - PRECO_CAFE;
+	private void calcularTroco() {
+		this.troco = valorInserido - precoCafe;
 		
 	}
 	
-	public int getDolarValue(){
-		return dolar;
-	}
-
-	public int getCentsValue(){
-		return cents;
-	}
-	
-	public void verificarDinheiroInserido() throws DinheiroInsuficienteException{
-		if(!this.daPraComprar){
+	public void verificarDinheiroInserido(int preco) throws DinheiroInsuficienteException{
+		precoCafe = preco;
+		if(valorInserido > precoCafe){
+			passarTroco = true;
+		}else if(valorInserido < precoCafe){
+			passarTroco = false;
 			throw new  DinheiroInsuficienteException();
+
+		}else{
+			passarTroco = false;
 		}
 	}
 	
-	public boolean passarTroco(){
+	private boolean passarTroco(){
 		return this.passarTroco;
 	}
 	
-	public boolean caixaTemTroco(ComponentsFactory factory){
+	private boolean caixaTemTroco(ComponentsFactory factory){
 		int aux;
-		
 		for (Coin coin : Coin.reverse()) {
 			aux = troco;
 			int qtdMoedas = 0;
-			
 			while ( (coin.getValue() <= aux) && (aux -coin.getValue() >= 0) ) {
 				qtdMoedas++;
 				aux -= coin.getValue();
 			}
-			
 			if((qtdMoedas > 0) ){
 				if(qtdMoedas <= (factory.getCashBox().count(coin))){
-					
-					
 					for(int i = 0; i < qtdMoedas; i++){
 						moedasDoTroco.add(coin);
 						troco -= coin.getValue();
 					}
-				
 				}
-				
-			}
-			
-			if(troco == 0){
-				return true;
 			}
 		}
-		
 		if(troco == 0){
 			return true;
 		}
-		
 		return false;
 	}
 	
