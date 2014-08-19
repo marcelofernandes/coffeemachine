@@ -40,6 +40,7 @@ public class GerenteDeBebidas {
 			caixa.zerarValores();
 			return;
 		}
+		
 		try {
 			caixa.verificarSeTemTroco(factory);
 		} catch (CaixaSemTrocoException e) {
