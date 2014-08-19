@@ -32,7 +32,7 @@ public class GerenteDeBebidas {
 			caixa.retornarMoedas();
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			return;
-		}	
+		}
 		
 		if(!cafe.contemIngredientes()){
 			caixa.retornarMoedas();
@@ -46,6 +46,9 @@ public class GerenteDeBebidas {
 		} catch (CaixaSemTrocoException e) {
 			GerenteDeMensagens.mostrarMensagemTrocoInsuficiente();
 			caixa.retornarMoedas();
+			GerenteDeMensagens.mostrarMensagemInserirMoedas();
+			return;
+		}catch(CodigoInexistenteException e){
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			return;
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
 import br.ufpb.dce.aps.coffeemachine.Coin;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
+import br.ufpb.dce.aps.coffeemachine.Messages;
 
 public class GerenteDeCaixa {
 	private int cents, dolar;
@@ -134,7 +135,7 @@ public class GerenteDeCaixa {
 		}
 	}
 
-	public void verificarSeTemTroco(ComponentsFactory factory) throws CaixaSemTrocoException{
+	public void verificarSeTemTroco(ComponentsFactory factory) throws CaixaSemTrocoException, CodigoInexistenteException{
 		if(passarTroco() && !leuCracha){
 			calcularTroco();
 			if(!caixaTemTroco(factory)){
@@ -143,7 +144,12 @@ public class GerenteDeCaixa {
 		}else if(!passarTroco() && !leuCracha){
 			return;
 		}else{
-			factory.getPayrollSystem().debit(35, 123456);
+			factory.getPayrollSystem().debit(precoCafe, 123456);
+			if(precoCafe == 25){
+
+				factory.getDisplay().warn(Messages.UNKNOWN_BADGE_CODE);
+				throw new CodigoInexistenteException();
+			}
 		}
 		
 		
