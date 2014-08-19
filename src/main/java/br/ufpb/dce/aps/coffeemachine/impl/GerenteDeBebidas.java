@@ -11,6 +11,8 @@ public class GerenteDeBebidas {
 	private ComponentsFactory factory;
 	private Cafe cafe;
 	private HashMap <Button, Cafe> bebidas = new HashMap <Button, Cafe>();
+	private HashMap <Button, Integer> precos = new HashMap <Button, Integer>();
+
 	private GerenteDeCaixa caixa;
 
 	public GerenteDeBebidas(ComponentsFactory factory){
@@ -27,9 +29,19 @@ public class GerenteDeBebidas {
 		bebidas.put(Button.BUTTON_2, new CafeComCreme(factory));
 		bebidas.put(Button.BUTTON_4, new CafeComCremeEacucar(factory));
 		bebidas.put(Button.BUTTON_5, new Bouillon(factory));
-		factory.getButtonDisplay().show("Black: $0.35", "White: $0.35",
-				"Black with sugar: $0.35", "White with sugar: $0.35",
-				"Bouillon: $0.25", null, null);
+		
+		
+		precos.put(Button.BUTTON_1, 35);
+		precos.put(Button.BUTTON_3, 35);
+		precos.put(Button.BUTTON_2, 35);
+		precos.put(Button.BUTTON_4, 35);
+		precos.put(Button.BUTTON_5, 35);
+		
+	}
+	
+	
+	public void setPreco(Button drink, int priceCents){
+		precos.put(drink, priceCents);
 	}
 
 //	public void selecionarBebida(Drink drink, GerenteDeCaixa gerenteDeCaixa){
