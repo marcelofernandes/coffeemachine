@@ -145,7 +145,7 @@ public class GerenteDeCaixa {
 
 	public void lerCracha() {
 		if(valorInserido > 0){
-			//TODO 
+			GerenteDeMensagens.mostrarMensagemInseriuMoeda();
 			return;
 		}
 		GerenteDeMensagens.mostrarMensagemCracha();

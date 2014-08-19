@@ -51,4 +51,9 @@ public class GerenteDeMensagens {
 		factory.getDisplay().warn(Messages.CAN_NOT_INSERT_COINS);
 
 	}
+
+	public static void mostrarMensagemInseriuMoeda() {
+		factory.getDisplay().warn(Messages.CAN_NOT_READ_BADGE);
+
+	}
 }
