@@ -1,9 +1,10 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
+import br.ufpb.dce.aps.coffeemachine.Button;
 import br.ufpb.dce.aps.coffeemachine.CoffeeMachine;
 import br.ufpb.dce.aps.coffeemachine.Coin;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
-import br.ufpb.dce.aps.coffeemachine.Drink;
+//import br.ufpb.dce.aps.coffeemachine.Drink;
 
 public class MyCoffeeMachine implements CoffeeMachine {
 	
@@ -18,9 +19,9 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		gerenteDeCaixa.cancelar();
 	}
 
-	public void select(Drink drink) {
-		gerenteDeBebidas.selecionarBebida(drink, gerenteDeCaixa);
-	}
+//	public void select(Drink drink) {
+//		gerenteDeBebidas.selecionarBebida(drink, gerenteDeCaixa);
+//	}
 
 	public void setFactory(ComponentsFactory factory) {
 		gerenteDeCaixa = new GerenteDeCaixa(factory);
@@ -29,6 +30,11 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 	public void readBadge(int badgeCode) {
 		gerenteDeCaixa.lerCracha();
+	}
+
+	public void select(Button drink) {
+		gerenteDeBebidas.selecionarBebida(drink, gerenteDeCaixa);
+
 	}
 
 }
