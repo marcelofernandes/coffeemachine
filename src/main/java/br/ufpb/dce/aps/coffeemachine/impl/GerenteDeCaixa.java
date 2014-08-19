@@ -14,13 +14,15 @@ public class GerenteDeCaixa {
 	private boolean passarTroco;
 	private int valorInserido;
 	private int troco;
-	private int precoCafe;;
+	private int precoCafe;
+	private boolean leuCracha;
 	private ComponentsFactory factory;
 
 	public GerenteDeCaixa(ComponentsFactory factory){
 		this.factory = factory;
 		this.cents = 0;
 		this.dolar = 0;
+		leuCracha = false;
 		this.troco = 0;
 		this.passarTroco = false;
 		this.valorInserido = 0;
@@ -39,8 +41,12 @@ public class GerenteDeCaixa {
 		cents += coin.getValue() % 100;
 		dolar += coin.getValue() / 100;
 		coins.add(coin);
+		if(leuCracha){
+			GerenteDeMensagens.leucrachaMensagem();
+			retornarMoedas();
+			return;
+		}
 		GerenteDeMensagens.mostrarValorTotal(dolar, cents);
-
 	}
 	
 	public void cancelar(){
@@ -48,7 +54,7 @@ public class GerenteDeCaixa {
 			throw new CoffeeMachineException("Sessão cancelada!");
 		}
 		GerenteDeMensagens.mostrarmensagemCancelar();
-		retornarMoedas(factory);
+		retornarMoedas();
 		GerenteDeMensagens.mostrarMensagemInserirMoedas();
 	}
 	
@@ -98,7 +104,7 @@ public class GerenteDeCaixa {
 		return false;
 	}
 	
-	public void retornarMoedas(ComponentsFactory factory) {
+	public void retornarMoedas() {
 		for (Coin coin : Coin.reverse()) {
 			for (int i = 0; i < coins.size(); i++) {
 				if (coins.get(i).equals(coin)) {
@@ -138,7 +144,12 @@ public class GerenteDeCaixa {
 	}
 
 	public void lerCracha() {
+		if(valorInserido > 0){
+			//TODO 
+			return;
+		}
 		GerenteDeMensagens.mostrarMensagemCracha();
+		leuCracha = true;
 	}
 	
 }

@@ -46,4 +46,9 @@ public class GerenteDeMensagens {
 		factory.getDisplay().info(Messages.BADGE_READ);
 
 	}
+
+	public static void leucrachaMensagem() {
+		factory.getDisplay().warn(Messages.CAN_NOT_INSERT_COINS);
+
+	}
 }

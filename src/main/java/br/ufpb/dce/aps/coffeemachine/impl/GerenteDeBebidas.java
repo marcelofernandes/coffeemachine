@@ -29,13 +29,13 @@ public class GerenteDeBebidas {
 			caixa.verificarDinheiroInserido(cafe.getPreco());
 		}catch(DinheiroInsuficienteException e){
 			GerenteDeMensagens.mostrarMensagemDinheiroInsuficiente();
-			caixa.retornarMoedas(factory);
+			caixa.retornarMoedas();
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			return;
 		}	
 		
 		if(!cafe.contemIngredientes()){
-			caixa.retornarMoedas(factory);
+			caixa.retornarMoedas();
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			caixa.zerarValores();
 			return;
@@ -44,7 +44,7 @@ public class GerenteDeBebidas {
 			caixa.verificarSeTemTroco(factory);
 		} catch (CaixaSemTrocoException e) {
 			GerenteDeMensagens.mostrarMensagemTrocoInsuficiente();
-			caixa.retornarMoedas(factory);
+			caixa.retornarMoedas();
 			GerenteDeMensagens.mostrarMensagemInserirMoedas();
 			return;
 		}
