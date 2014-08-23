@@ -23,10 +23,10 @@ public class Cafe{
 		precoCafe = 35.0;
 	}
 	
-//	protected void setReceita(Recipe recipe){
-//		//agua = recipe.getIngredientQuantity("Water");
-//		po = recipe.getIngredientQuantity("Coffee Powder");
-//	}
+	protected void setReceita(Recipe recipe){
+		agua = recipe.getIngredientQuantity("Water");
+		po = recipe.getIngredientQuantity("Coffee Powder");
+	}
 	
 	protected void servirBebida() {
 		factory.getDisplay().info(Messages.RELEASING);
@@ -69,7 +69,7 @@ public class Cafe{
 	}
 	
 	protected void liberarAgua(){
-		factory.getWaterDispenser().release(poRelease);
+		factory.getWaterDispenser().release(agua);
 	}
 
 	protected void liberarPo(){

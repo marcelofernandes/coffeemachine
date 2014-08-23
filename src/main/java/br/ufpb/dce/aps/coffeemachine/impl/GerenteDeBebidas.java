@@ -94,7 +94,7 @@ public class GerenteDeBebidas {
 		if(cafe == null){
 			cafe = bebidas.get(drink);
 		}
-		//cafe.setReceita(recipe);
+		cafe.setReceita(recipe);
 		precos.put(drink, recipe.getPriceCents());
 	}
 
