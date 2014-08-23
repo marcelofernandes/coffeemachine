@@ -81,7 +81,7 @@ public class Cafe{
 	}
 	
 	protected void liberarBebida(){
-		factory.getDrinkDispenser().release(100.0);
+		factory.getDrinkDispenser().release();
 	}
 
 	public double getPreco() {
