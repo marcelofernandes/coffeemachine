@@ -8,9 +8,9 @@ public class CafeComCreme extends Cafe{
 
 	public CafeComCreme(ComponentsFactory factory) {
 		super(factory);
-		agua = 80;
-		po = 15;
-		poRelease = 80;
+		agua = 80.0;
+		po = 15.0;
+		poRelease = 80.0;
 	}
 	
 	@Override
@@ -18,7 +18,7 @@ public class CafeComCreme extends Cafe{
 		if (!(super.contemIngredientes())){
 			return false;
 		}else{
-			if(!(factory.getCreamerDispenser().contains(20))){
+			if(!(factory.getCreamerDispenser().contains(20.0))){
 				factory.getDisplay().warn("Out of Creamer");
 				return false;
 			}
@@ -29,7 +29,7 @@ public class CafeComCreme extends Cafe{
 	@Override
 	public void prepararBebida() {
 		super.prepararBebida();
-		factory.getCreamerDispenser().release(20);
+		factory.getCreamerDispenser().release(20.0);
 	}
 	
 }

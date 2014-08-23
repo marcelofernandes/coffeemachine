@@ -4,14 +4,16 @@ import java.util.HashMap;
 
 import br.ufpb.dce.aps.coffeemachine.Button;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
+import br.ufpb.dce.aps.coffeemachine.Recipe;
 
 public class GerenteDeBebidas {
 	
 	private ComponentsFactory factory;
-	private Cafe cafe;
+	private Cafe cafe = null;
 	private HashMap <Button, Cafe> bebidas = new HashMap <Button, Cafe>();
 	private GerenteDeCaixa caixa;
 	private HashMap <Button, Integer> precos = new HashMap <Button, Integer>();
+	private Recipe receitas;
 
 	public GerenteDeBebidas(ComponentsFactory factory){
 		this.factory = factory;
@@ -85,6 +87,15 @@ public class GerenteDeBebidas {
 
 	public void servirBebida() {
 		cafe.servirBebida();
+	}
+
+	public void configurarBebidas(Button drink, Recipe recipe) {
+		receitas = recipe;
+		if(cafe == null){
+			cafe = bebidas.get(drink);
+		}
+		//cafe.setReceita(recipe);
+		precos.put(drink, recipe.getPriceCents());
 	}
 
 }

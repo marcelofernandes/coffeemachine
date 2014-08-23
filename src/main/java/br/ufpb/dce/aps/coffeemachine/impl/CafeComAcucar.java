@@ -13,7 +13,7 @@ public class CafeComAcucar extends Cafe{
 		if (!(super.contemIngredientes())){
 			return false;
 		}else{
-			if(!(factory.getSugarDispenser().contains(5))){
+			if(!(factory.getSugarDispenser().contains(5.0))){
 				factory.getDisplay().warn("Out of Sugar");
 				return false;
 			}
@@ -24,7 +24,7 @@ public class CafeComAcucar extends Cafe{
 	@Override
 	public void prepararBebida() {
 		super.prepararBebida();
-		factory.getSugarDispenser().release(5);
+		factory.getSugarDispenser().release(5.0);
 	}
 
 }

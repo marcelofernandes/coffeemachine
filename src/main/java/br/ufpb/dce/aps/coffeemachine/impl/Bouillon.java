@@ -32,7 +32,7 @@ public class Bouillon extends Cafe{
 	
 	@Override
 	protected void liberarAgua(){
-		factory.getWaterDispenser().release(100);
+		factory.getWaterDispenser().release(100.0);
 	}
 
 }
