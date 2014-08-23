@@ -23,17 +23,26 @@ public class GerenteDeBebidas {
 		bebidas.put(Button.BUTTON_2, new CafeComCreme(factory));
 		bebidas.put(Button.BUTTON_4, new CafeComCremeEacucar(factory));
 		bebidas.put(Button.BUTTON_5, new Bouillon(factory));	
+		bebidas.put(Button.BUTTON_6, new SweetCream(factory));	
+
 		
 		precos.put(Button.BUTTON_1, 35);
 		precos.put(Button.BUTTON_3, 35);
 		precos.put(Button.BUTTON_2, 35);
 		precos.put(Button.BUTTON_4, 35);
 		precos.put(Button.BUTTON_5, 25);
+		//precos.put(Button.BUTTON_6, 50);
+
 	}
 	
 	public void setPreco(Button drink, int priceCents){
 		precos.put(drink, priceCents);
-		GerenteDeMensagens.mostrarPrecos(precos);
+
+		//GerenteDeMensagens.mostrarPrecos(precos);
+
+		factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
+				"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
+				"Bouillon: $0." + precos.get(Button.BUTTON_5), "Sweet cream: $0." + precos.get(Button.BUTTON_6), null);
 	}
 	
 	public HashMap <Button, Integer> getPrecos(){
@@ -96,6 +105,17 @@ public class GerenteDeBebidas {
 		}
 		cafe.setReceita(recipe);
 		precos.put(drink, recipe.getPriceCents());
+		if(precos.containsKey(Button.BUTTON_6)){
+			factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
+					"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
+					"Bouillon: $0." + precos.get(Button.BUTTON_5), "Sweet cream: $0.50", null);
+		
+		}else{
+			factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
+					"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
+					"Bouillon: $0." + precos.get(Button.BUTTON_5), null, null);
+		
+		}
 	}
 
 }

@@ -39,7 +39,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 
 	public void configuteDrink(Button drink, Recipe recipe) {
 		gerenteDeBebidas.configurarBebidas(drink, recipe);
-		GerenteDeMensagens.mostrarPrecos(gerenteDeBebidas.getPrecos());
+		//GerenteDeMensagens.mostrarPrecos(gerenteDeBebidas.getPrecos());
 
 	}
 

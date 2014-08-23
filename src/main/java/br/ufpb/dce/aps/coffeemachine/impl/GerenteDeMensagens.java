@@ -60,6 +60,8 @@ public class GerenteDeMensagens {
 
 	}
 	
+	
+	
 	public static void mostrarPrecos(HashMap<Button, Integer> precos){
 		factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
 				"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),

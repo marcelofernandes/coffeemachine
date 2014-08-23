@@ -25,7 +25,7 @@ public class Cafe{
 	
 	protected void setReceita(Recipe recipe){
 		agua = recipe.getIngredientQuantity("Water");
-		po = recipe.getIngredientQuantity("Coffee Powder");
+		//po = recipe.getIngredientQuantity("Coffee Powder");
 	}
 	
 	protected void servirBebida() {
