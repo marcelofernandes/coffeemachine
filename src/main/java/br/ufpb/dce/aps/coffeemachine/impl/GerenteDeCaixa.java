@@ -62,7 +62,6 @@ public class GerenteDeCaixa {
 	
 	private void calcularTroco() {
 		this.troco = valorInserido - precoCafe;
-		
 	}
 	
 	public void verificarDinheiroInserido(int preco) throws DinheiroInsuficienteException{
@@ -72,7 +71,6 @@ public class GerenteDeCaixa {
 		}else if(valorInserido < precoCafe && !leuCracha){
 			passarTroco = false;
 			throw new  DinheiroInsuficienteException();
-
 		}else{
 			passarTroco = false;
 		}
@@ -152,12 +150,9 @@ public class GerenteDeCaixa {
 				throw new CodigoInexistenteException();
 			}
 		}
-		
-		
 	}
 
 	public void lerCracha() {
-
 		if(valorInserido > 0){
 			GerenteDeMensagens.mostrarMensagemInseriuMoeda();
 			return;
