@@ -113,6 +113,9 @@ public class GerenteDeBebidas {
 		if(recipe.getItems().size() == 0){
 			throw new CoffeeMachineException("Sem itens");
 		}
+		if( recipe.getName().equals("Black") && recipe.getItems().containsKey(Recipe.MILK)){
+			throw new CoffeeMachineException("Item inválido");
+		}
 		if(precos.containsKey(Button.BUTTON_6)){
 			factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
 					"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
