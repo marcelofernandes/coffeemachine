@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import br.ufpb.dce.aps.coffeemachine.Button;
+import br.ufpb.dce.aps.coffeemachine.CoffeeMachineException;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
 import br.ufpb.dce.aps.coffeemachine.Dispenser;
 import br.ufpb.dce.aps.coffeemachine.Recipe;
@@ -105,6 +106,9 @@ public class GerenteDeBebidas {
 			cafe = bebidas.get(drink);
 		}
 		cafe.setReceita(recipe);
+		if(recipe.getPriceCents() == 0){
+			throw new CoffeeMachineException("Preço inválido");
+		}
 		precos.put(drink, recipe.getPriceCents());
 		if(precos.containsKey(Button.BUTTON_6)){
 			factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
