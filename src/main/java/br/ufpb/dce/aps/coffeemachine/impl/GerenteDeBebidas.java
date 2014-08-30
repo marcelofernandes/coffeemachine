@@ -57,7 +57,6 @@ public class GerenteDeBebidas {
 		if(!precos.containsKey(drink)){
 			throw new CoffeeMachineException("Botão inválido");
 		}
-		
 		int preco = precos.get(drink);
 		cafe = bebidas.get(drink);
 		caixa = gerenteDeCaixa;
