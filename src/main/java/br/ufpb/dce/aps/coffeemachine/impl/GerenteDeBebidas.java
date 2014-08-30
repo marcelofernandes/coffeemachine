@@ -1,9 +1,11 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import br.ufpb.dce.aps.coffeemachine.Button;
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
+import br.ufpb.dce.aps.coffeemachine.Dispenser;
 import br.ufpb.dce.aps.coffeemachine.Recipe;
 
 public class GerenteDeBebidas {
@@ -13,7 +15,7 @@ public class GerenteDeBebidas {
 	private HashMap <Button, Cafe> bebidas = new HashMap <Button, Cafe>();
 	private GerenteDeCaixa caixa;
 	private HashMap <Button, Integer> precos = new HashMap <Button, Integer>();
-	private Recipe receitas;
+	private HashMap <String, Dispenser> ingredientes = new HashMap <String, Dispenser>();
 
 	public GerenteDeBebidas(ComponentsFactory factory){
 		this.factory = factory;
@@ -99,7 +101,6 @@ public class GerenteDeBebidas {
 	}
 
 	public void configurarBebidas(Button drink, Recipe recipe) {
-		receitas = recipe;
 		if(cafe == null){
 			cafe = bebidas.get(drink);
 		}
@@ -115,6 +116,18 @@ public class GerenteDeBebidas {
 					"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
 					"Bouillon: $0." + precos.get(Button.BUTTON_5), null, null);
 		
+		}
+	}
+
+	public void adicionarDispenser(HashMap <String, Dispenser> d) {
+		// TODO Auto-generated method stub
+		ingredientes.putAll(d);
+		Set<String> k = ingredientes.keySet();
+		for(String str: k){
+			if(cafe == null){
+				cafe = bebidas.get(Button.BUTTON_6);
+			}
+			cafe.addispenser(str, ingredientes.get(str));
 		}
 	}
 

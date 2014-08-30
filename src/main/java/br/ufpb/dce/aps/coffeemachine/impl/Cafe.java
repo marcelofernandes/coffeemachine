@@ -1,6 +1,9 @@
 package br.ufpb.dce.aps.coffeemachine.impl;
 
+import java.util.HashMap;
+
 import br.ufpb.dce.aps.coffeemachine.ComponentsFactory;
+import br.ufpb.dce.aps.coffeemachine.Dispenser;
 import br.ufpb.dce.aps.coffeemachine.Messages;
 import br.ufpb.dce.aps.coffeemachine.Recipe;
 
@@ -11,21 +14,44 @@ public class Cafe{
 	protected double po;
 	protected double poRelease;
 	protected double precoCafe;
-//	protected Recipe receita;
+	protected HashMap <String, Dispenser> dispensers = new HashMap <String, Dispenser>();
+
+
+	protected Recipe receita;
 	
 
 	public Cafe(ComponentsFactory factory){
 		this.factory = factory;
-//		receita = new Recipe();
+		configurarReceita();
 		agua = 100.0;
 		po = 15.0;
 		poRelease = 100.0;
 		precoCafe = 35.0;
 	}
 	
+	
+	private void configurarReceita() {
+		receita = new Recipe();
+		receita.setName("Black");
+		receita.setPriceCents(35);
+	
+		receita.setItem(Recipe.WATER, 100.0);
+		receita.setItem(Recipe.COFFEE_POWDER, 15.0);
+
+		receita.setPlanSequence(Recipe.WATER, Recipe.COFFEE_POWDER);
+		receita.setMixSequence(Recipe.COFFEE_POWDER, Recipe.WATER);
+	}
+
+
+	public void addispenser(String nome, Dispenser d){
+		dispensers.put(nome, d);
+	}
+	
 	protected void setReceita(Recipe recipe){
-		agua = recipe.getIngredientQuantity("Water");
-		//po = recipe.getIngredientQuantity("Coffee Powder");
+		receita = recipe;
+		if(receita.getIngredientQuantity("Water") != null){
+			agua = receita.getIngredientQuantity("Water");
+		}
 	}
 	
 	protected void servirBebida() {
