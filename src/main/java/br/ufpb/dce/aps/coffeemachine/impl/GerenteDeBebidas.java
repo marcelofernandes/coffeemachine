@@ -105,17 +105,25 @@ public class GerenteDeBebidas {
 		if(cafe == null){
 			cafe = bebidas.get(drink);
 		}
+		
 		cafe.setReceita(recipe);
 		if(recipe.getPriceCents() == 0){
 			throw new CoffeeMachineException("Preço inválido");
 		}
+		
 		precos.put(drink, recipe.getPriceCents());
 		if(recipe.getItems().size() == 0){
 			throw new CoffeeMachineException("Sem itens");
 		}
+		
 		if( recipe.getName().equals("Black") && recipe.getItems().containsKey(Recipe.MILK)){
 			throw new CoffeeMachineException("Item inválido");
 		}
+		
+		if( !(recipe.getName().equals("Steamed milk")) && recipe.isSteamed()){
+			throw new CoffeeMachineException("Não pode usar steamer");
+		}
+		
 		if(precos.containsKey(Button.BUTTON_6)){
 			factory.getButtonDisplay().show("Black: $0." + precos.get(Button.BUTTON_1), "White: $0." + precos.get(Button.BUTTON_2),
 					"Black with sugar: $0." + precos.get(Button.BUTTON_3), "White with sugar: $0." + precos.get(Button.BUTTON_4),
