@@ -46,10 +46,7 @@ public class MyCoffeeMachine implements CoffeeMachine {
 		if(ingredientes.size()>0){
 			gerenteDeBebidas.adicionarDispenser(ingredientes);
 		}
-
 		gerenteDeBebidas.configurarBebidas(drink, recipe);
-		//GerenteDeMensagens.mostrarPrecos(gerenteDeBebidas.getPrecos());
-
 	}
 
 	public void addDispenser(String ingredient, Dispenser dispenser) {
